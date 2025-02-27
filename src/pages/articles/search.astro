@@ -5,7 +5,7 @@ import SearchForm from "../../components/ui/SearchForm.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
-// Get the query parameter; it may be null if not provided
+// Get the query parameter; may be null if not provided
 const query: string | null = Astro.url.searchParams.get('query');
 
 // Retrieve all blog articles
@@ -18,10 +18,12 @@ let searchResults: CollectionEntry<'blog'>[] = [];
 if (query) {
   const searchTerm = query.toLowerCase();
   searchResults = allBlogArticles.filter(article => {
-    const titleMatch = article.data.title.toLowerCase().includes(searchTerm);
-    const bodyMatch = article.body.toLowerCase().includes(searchTerm);
-    const slugMatch = article.slug.toLowerCase().includes(searchTerm);
-    return titleMatch || bodyMatch || slugMatch;
+    // Use empty strings as defaults in case any property is null or undefined
+    const title = (article.data.title || "").toLowerCase();
+    const body = (article.body || "").toLowerCase();
+    const slug = (article.slug || "").toLowerCase();
+    
+    return title.includes(searchTerm) || body.includes(searchTerm) || slug.includes(searchTerm);
   });
 }
 ---
