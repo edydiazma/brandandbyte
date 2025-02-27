@@ -1,0 +1,17 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"       # Carpeta para almacenar archivos subidos
+public_folder: "/uploads"            # Ruta pública para acceder a esos archivos
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"       # Ajusta esta ruta según dónde tengas tus archivos de contenido
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Fecha de publicación", name: "pubDate", widget: "datetime" }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }
