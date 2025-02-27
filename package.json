@@ -9,8 +9,8 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^5.2.5",
-    "@astrojs/cloudflare": "^12.2.3",
+    "astro": "^4.16.18",
+    "@astrojs/cloudflare": "^8.1.0",
     "@astrojs/tailwind": "^6.0.0",
     "astro-navbar": "^2.3.7",
     "lenis": "^1.0.46",
