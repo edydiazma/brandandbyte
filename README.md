@@ -1,4 +1,4 @@
-# brand&Byte - Martech Marketing Agency Landing Page
+# Brand&Byte - Martech Marketing Agency Landing Page
 
 Introducing "Brand&byte" - a stunning and versatile Astro theme for marketing agencies.
 
