@@ -1,31 +1,19 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
-import ArticleCard from "../../components/ui/ArticleCard.astro";
 import SearchForm from "../../components/ui/SearchForm.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
-// Get the query parameter; may be null if not provided
-const query: string | null = Astro.url.searchParams.get('query');
-
-// Retrieve all blog articles
+// Retrieve all blog articles at build time
 const allBlogArticles: CollectionEntry<'blog'>[] = await getCollection('blog');
 
-// Initialize searchResults as an empty array
-let searchResults: CollectionEntry<'blog'>[] = [];
-
-// Only filter articles if a query exists
-if (query) {
-  const searchTerm = query.toLowerCase();
-  searchResults = allBlogArticles.filter(article => {
-    // Use empty strings as defaults in case any property is null or undefined
-    const title = (article.data.title || "").toLowerCase();
-    const body = (article.body || "").toLowerCase();
-    const slug = (article.slug || "").toLowerCase();
-    
-    return title.includes(searchTerm) || body.includes(searchTerm) || slug.includes(searchTerm);
-  });
-}
+// Map article data into a simplified array for client-side search
+const articlesData = allBlogArticles.map(article => ({
+  title: article.data.title,
+  // Construct URL – adjust the path as needed for your site structure
+  url: article.slug ? `/articles/${article.slug}/` : "/articles",
+  description: article.data.description || ""
+}));
 ---
 <MainLayout title="Search Results">
   <main class="space-y-20">
@@ -38,20 +26,69 @@ if (query) {
       </a>
 
       <br>
+      <!-- Optionally include your SearchForm component -->
       <SearchForm />
       <br>
-      {query ? (
-        <>
-          <h2 class="text-2xl pb-3 mt-6">Results For <strong>{query}</strong></h2>
-          <div class="grid gap-8 lg:grid-cols-2">
-            {searchResults.map(article => (
-              <ArticleCard article={article} />
-            ))}
-          </div>
-        </>
-      ) : (
-        <h2 class="text-2xl pb-3 mt-6">Please enter a search query.</h2>
-      )}
+      <!-- New search input for client-side filtering -->
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search articles..."
+        class="p-2 border border-gray-300 w-full max-w-md"
+      />
+
+      <!-- Container for search results -->
+      <ul id="resultsList" class="grid gap-8 lg:grid-cols-2">
+        {articlesData.map(article => (
+          <li class="result-item" data-title={article.title.toLowerCase()}>
+            <a href={article.url} class="text-lg font-bold text-black hover:text-green">
+              {article.title}
+            </a>
+            {article.description && <p>{article.description}</p>}
+          </li>
+        ))}
+      </ul>
+      <p id="noResults" class="hidden text-xl mt-4">No matching articles found.</p>
     </div>
   </main>
+
+  <!-- Client-side search script -->
+  <script>
+    (function() {
+      const searchInput = document.getElementById('searchInput');
+      const resultsList = document.getElementById('resultsList');
+      const noResults = document.getElementById('noResults');
+      const resultItems = Array.from(document.getElementsByClassName('result-item'));
+
+      function filterResults(query) {
+        const term = query.trim().toLowerCase();
+        let visibleCount = 0;
+        resultItems.forEach(item => {
+          const title = item.getAttribute('data-title');
+          // If the query is empty or the title includes the search term, show the item
+          if (!term || title.includes(term)) {
+            item.style.display = "block";
+            visibleCount++;
+          } else {
+            item.style.display = "none";
+          }
+        });
+        // Show the "no results" message if no items are visible
+        noResults.classList.toggle("hidden", visibleCount > 0);
+      }
+
+      // Listen for user input to filter results dynamically
+      searchInput.addEventListener('input', (e) => {
+        filterResults(e.target.value);
+      });
+
+      // On page load, check for a query parameter in the URL and apply it
+      const params = new URLSearchParams(window.location.search);
+      const initialQuery = params.get('query');
+      if (initialQuery) {
+        searchInput.value = initialQuery;
+        filterResults(initialQuery);
+      }
+    })();
+  </script>
 </MainLayout>
