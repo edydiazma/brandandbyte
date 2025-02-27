@@ -5,13 +5,13 @@ import SearchForm from "../../components/ui/SearchForm.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
-// Get the query parameter from the URL (could be null)
+// Get the query parameter; it may be null if not provided
 const query: string | null = Astro.url.searchParams.get('query');
 
 // Retrieve all blog articles
 const allBlogArticles: CollectionEntry<'blog'>[] = await getCollection('blog');
 
-// Initialize searchResults
+// Initialize searchResults as an empty array
 let searchResults: CollectionEntry<'blog'>[] = [];
 
 // Only filter articles if a query exists
