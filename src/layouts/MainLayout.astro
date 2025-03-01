@@ -9,7 +9,6 @@ const { ...props } = Astro.props;
 ---
 
 <html lang="en">
-  <GTM />
   <MainHead {...props} />
   <style>
     html.lenis {
@@ -26,6 +25,7 @@ const { ...props } = Astro.props;
     }
   </style>
   <script src="../utils/lenis"></script>
+  <GTM />
   <body class="bg-white font-grotesk">
     <main>
       <Navbar />
