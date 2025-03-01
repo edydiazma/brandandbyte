@@ -3,11 +3,13 @@ import Footer from "../components/ui/Footer.astro";
 import Navbar from "../components/ui/Navbar.astro";
 import MainHead from "./MainHead.astro";
 import "../styles/global.css";
+import GTM from "../components/GTM.astro";
 
 const { ...props } = Astro.props;
 ---
 
 <html lang="en">
+  <GTM />
   <MainHead {...props} />
   <style>
     html.lenis {
