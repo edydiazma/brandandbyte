@@ -1,6 +1,6 @@
 ---
 title: 'How to quickly deploy a static website'
-pubDate: 2024-01-20
+pubDate: 2025-01-20
 author: 'Jese Leos'
 authImage: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png'
 image: 'image1.png'
