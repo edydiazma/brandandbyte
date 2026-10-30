@@ -1608,24 +1608,26 @@
     #bb-product-lineup .bb-system-card:before {
       content: "";
       position: absolute;
-      width: 210px;
-      height: 210px;
+      width: 168px;
+      height: 168px;
       border-radius: 50%;
       background: var(--bb-green);
-      right: -42px;
-      top: -48px;
+      right: -24px;
+      top: -28px;
+      z-index: 0;
     }
 
     #bb-product-lineup .bb-system-icon {
       position: absolute;
-      right: 20px;
-      top: 18px;
-      width: 112px;
-      height: 112px;
+      right: 18px;
+      top: 16px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid var(--bb-dark);
       mix-blend-mode: multiply;
+      z-index: 1;
     }
 
     #bb-product-lineup .bb-system-number {
@@ -1633,21 +1635,31 @@
       font-size: 13px;
       letter-spacing: .08em;
       text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+      max-width: calc(100% - 140px);
     }
 
-    #bb-product-lineup .bb-system-card h2 {
-      max-width: 82%;
-      margin: 78px 0 12px;
-      font-size: clamp(31px, 4vw, 49px);
-      line-height: .96;
+    #bb-product-lineup .bb-system-card > div {
+      position: relative;
+      z-index: 2;
+    }
+
+    #bb-product-lineup .bb-system-card h2,
+    #bb-product-lineup .bb-system-card h3 {
+      max-width: 100%;
+      margin: 92px 0 12px;
+      font-size: clamp(28px, 3.4vw, 42px);
+      line-height: 1.02;
       letter-spacing: -.04em;
       font-weight: 500;
+      color: var(--bb-white);
     }
 
     #bb-product-lineup .bb-system-card p {
       max-width: 470px;
       margin: 0;
-      color: #d8d8dc;
+      color: #e4e4e9;
       font-size: 15px;
       line-height: 1.5;
     }
@@ -2152,7 +2164,7 @@
             <span class="bb-system-number" data-copy="systemLabel">El sistema operativo Brand&Byte</span>
             <img class="bb-system-icon" src="assets/system-icon.jpg" alt="Operating System">
             <div>
-              <h3 data-copy="systemTitle">Sigue la intención.</h3>
+              <h2 data-copy="systemTitle">Sigue la intención.</h2>
               <p data-copy="systemText">Explora los momentos que conectan el descubrimiento con una decisión comercial.</p>
               <div class="bb-system-tags" aria-label="Capabilities">
                 <button type="button" class="cursor-interaction" data-journey="enablement">01 · Inspirar <svg class="bb-inline-arrow" width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11L11 3M5.25 3H11v5.75"/></svg></button>
