@@ -1376,6 +1376,17 @@
       #bb-product-lineup .bb-lab-sections button { padding: 10px 12px; font-size: 14px; }
     }
     #bb-product-lineup .bb-hook { font-size: 19px !important; font-weight: 500; margin-bottom: 14px !important; }
+    #bb-product-lineup .bb-offer[hidden] { display: none; }
+    #bb-product-lineup .bb-offer { padding-top: 48px; }
+    #bb-product-lineup .bb-offer-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+    #bb-product-lineup .bb-offer-steps article { background: var(--bb-gray); border-radius: 24px; padding: 26px; box-shadow: 0 5px 0 var(--bb-dark); }
+    #bb-product-lineup .bb-offer-steps article > span { color: #555660; font-size: 12px; letter-spacing: .1em; }
+    #bb-product-lineup .bb-offer-steps h3 { font-size: 24px; line-height: 1.15; margin: 24px 0 12px; font-weight: 500; }
+    #bb-product-lineup .bb-offer-steps p { line-height: 1.55; }
+    #bb-product-lineup .bb-offer-steps small { display: block; border-top: 1px solid #c9c9ce; padding-top: 14px; margin-top: 18px; line-height: 1.4; }
+    #bb-product-lineup .bb-offer-foot { display: flex; justify-content: space-between; align-items: center; gap: 22px; margin-top: 24px; }
+    #bb-product-lineup .bb-offer-foot p { max-width: 720px; font-size: 14px; line-height: 1.5; }
+    #bb-product-lineup .bb-offer-cta { flex: none; background: var(--bb-green); color: var(--bb-dark); padding: 16px 20px; border-radius: 14px; text-decoration: none; font-weight: 500; }
     #bb-product-lineup .bb-receive { margin-top: 22px; padding-top: 16px; border-top: 1px solid #ccc; font-size: 14px; }
     #bb-product-lineup .bb-receive strong { text-transform: uppercase; letter-spacing: .04em; font-size: 12px; }
     #bb-product-lineup .bb-receive p { margin: 8px 0 0; line-height: 1.5; }
@@ -2025,6 +2036,8 @@
       #bb-product-lineup .bb-section-heading p { max-width: none; }
       #bb-product-lineup .bb-detail-content { border-left: 0; border-top: 1px solid var(--bb-dark); padding-left: 0; padding-top: 22px; }
       #bb-product-lineup .bb-manifesto { align-items: start; }
+      #bb-product-lineup .bb-offer-steps { grid-template-columns: 1fr; }
+      #bb-product-lineup .bb-offer-foot { align-items: stretch; flex-direction: column; }
     }
 
     @media (max-width: 620px) {
@@ -2150,6 +2163,40 @@
               </div>
             </div>
           </aside>
+        </section>
+
+        <section class="bb-section bb-offer" id="bb-offer" aria-labelledby="bb-offer-title" hidden>
+          <div class="bb-section-heading">
+            <div>
+              <span class="bb-label" data-copy="offerLabel">De la atención a la intención. De la inteligencia a la acción.</span>
+              <h2 id="bb-offer-title" data-copy="offerTitle">Guiado por expertos. Activado por agentes. Diseñado para aprender.</h2>
+            </div>
+            <p data-copy="offerText">Convertimos la experiencia del equipo B&B en reglas de decisión, agentes y flujos conectados. Las personas definen la estrategia; la IA ayuda a interpretar señales y ejecutar dentro de límites acordados. Cada iteración alimenta la siguiente decisión.</p>
+          </div>
+          <div class="bb-offer-steps">
+            <article>
+              <span>01 / INTERPRETAR</span>
+              <h3 data-copy="offerOneTitle">Lee las señales. Encuentra la oportunidad.</h3>
+              <p data-copy="offerOneText">Conectamos señales de medios, búsqueda, CRM y conversión. La IA ayuda a encontrar patrones; nuestros especialistas cuestionan los hallazgos y priorizan oportunidades con el contexto de tu negocio.</p>
+              <small data-copy="offerOneMeta">Interpretación de señales · criterio experto · decisiones priorizadas</small>
+            </article>
+            <article>
+              <span>02 / ACTIVAR</span>
+              <h3 data-copy="offerTwoTitle">Pon la inteligencia a trabajar.</h3>
+              <p data-copy="offerTwoText">Construimos agentes y flujos para calificar leads, asignarlos, dar seguimiento, generar reportes y asistir la producción de contenido. Las integraciones, los permisos y el escalamiento humano definen cómo opera cada flujo.</p>
+              <small data-copy="offerTwoMeta">Agentes conectados · flujos automatizados · aprobación humana</small>
+            </article>
+            <article>
+              <span>03 / APRENDER</span>
+              <h3 data-copy="offerThreeTitle">Convierte cada acción en aprendizaje.</h3>
+              <p data-copy="offerThreeText">Conectamos registros de ejecución, experimentos y resultados comerciales. El reporting automatizado hace visibles las señales; los expertos B&B revisan excepciones y ajustan campañas, journeys y reglas de los agentes.</p>
+              <small data-copy="offerThreeMeta">Ciclos de aprendizaje · experimentación controlada · criterio experto</small>
+            </article>
+          </div>
+          <div class="bb-offer-foot">
+            <p data-copy="offerGuardrail">La automatización se configura por caso de uso. Antes de activarla acordamos fuentes de datos, permisos, puntos de aprobación, métricas de éxito y rutas de escalamiento.</p>
+            <a class="bb-offer-cta" href="mailto:info@brandandbyte.com?subject=Agentic%20Growth%20Systems" data-copy="offerCta">Diseñemos tu sistema de crecimiento</a>
+          </div>
         </section>
 
         <section class="bb-section" id="bb-lineup" aria-labelledby="bb-lineup-title">
@@ -2597,15 +2644,23 @@
   <!-- SCRIPT LAYER: BRANDBYTE PRODUCT LINEUP + INTERACTIONS -->
   <script>
     (() => {
-      // 1. Core State
+      // 1. Core State & 50/50 A/B Test Variant Selection
       let initialLang = "es";
       try {
         initialLang = localStorage.getItem("bb_lang") || "es";
       } catch (e) {
         initialLang = "es";
       }
+      const urlParams = new URLSearchParams(window.location.search);
+      const forcedVariant = (urlParams.get("variant") || urlParams.get("ab") || "").toUpperCase();
+      const abVariant = (forcedVariant === "A" || forcedVariant === "B")
+        ? forcedVariant
+        : (Math.random() < 0.5 ? "A" : "B");
+      document.documentElement.dataset.abVariant = abVariant;
+
       const state = {
         lang: initialLang,
+        variant: abVariant,
         filter: "all",
         selected: null,
         solution: 0,
@@ -2770,6 +2825,62 @@
         }
       };
 
+      // Variant B (50% A/B Test): Agentic Growth Systems + Core Offer Section
+      if (state.variant === "B") {
+        Object.assign(copy.en, {
+          kicker: "Where human expertise turns AI into growth",
+          lede: "Connect human creativity, AI agents and commercial data to respond to customer intent. Brand&Byte brings the expertise to decide what to automate, what to test and where to act.",
+          explore: "Explore the growth system",
+          offerLabel: "From attention to intention. From intelligence to action.",
+          offerTitle: "Expert-led. Agent-powered. Built to learn.",
+          offerText: "We turn the B&B team's expertise into decision rules, agents and connected workflows. People define the strategy; AI helps interpret signals and execute within agreed boundaries. Every iteration feeds the next decision.",
+          offerOneTitle: "Read the signals. Find the opportunity.",
+          offerOneText: "We connect media, search, CRM and conversion signals. AI helps surface patterns; our specialists challenge the findings and prioritize opportunities against your business context.",
+          offerOneMeta: "Signal interpretation · expert judgment · prioritized decisions",
+          offerTwoTitle: "Put intelligence to work.",
+          offerTwoText: "We build agents and workflows for lead qualification, routing, follow-up, reporting and content assistance. Integrations, permissions and human handoffs define how each flow operates.",
+          offerTwoMeta: "Connected agents · automated workflows · human approval",
+          offerThreeTitle: "Turn each action into learning.",
+          offerThreeText: "We connect execution logs, experiments and commercial outcomes. Automated reporting brings signals into view; B&B experts review exceptions and refine campaigns, journeys and agent rules.",
+          offerThreeMeta: "Feedback loops · controlled experiments · expert refinement",
+          offerGuardrail: "Automation is configured for each use case. Data sources, permissions, approval points, success measures and escalation paths are agreed before activation.",
+          offerCta: "Design your growth system",
+          lineupLabel: "Activate intent. Connect every next step.",
+          lineupTitle: "Build the system your next stage needs.",
+          lineupText: "Combine strategy, demand, trusted signals, customer experiences and software around your business challenge. Explore the role each product plays.",
+          clientsTitle: "The challenge. Our contribution. The evidence.",
+          clientsText: "The value of each collaboration is in the work: the business challenge, the B&B products involved and the evidence of what changed. These are the companies behind the projects we will document.",
+          manifesto: "Human expertise. Agentic execution. Connected growth.",
+          manifestoText: "Our team's knowledge guides the strategy, the creative choices and the rules that power automation. Technology extends that expertise across the moments that matter to your customers."
+        });
+        Object.assign(copy.es, {
+          kicker: "Donde la experiencia humana convierte IA en crecimiento",
+          lede: "Conecta creatividad humana, agentes de IA y datos comerciales para responder a la intención de tus clientes. Brand&Byte aporta el criterio para decidir qué automatizar, qué probar y dónde actuar.",
+          explore: "Explorar el sistema de crecimiento",
+          offerLabel: "De la atención a la intención. De la inteligencia a la acción.",
+          offerTitle: "Guiado por expertos. Activado por agentes. Diseñado para aprender.",
+          offerText: "Convertimos la experiencia del equipo B&B en reglas de decisión, agentes y flujos conectados. Las personas definen la estrategia; la IA ayuda a interpretar señales y ejecutar dentro de límites acordados. Cada iteración alimenta la siguiente decisión.",
+          offerOneTitle: "Lee las señales. Encuentra la oportunidad.",
+          offerOneText: "Conectamos señales de medios, búsqueda, CRM y conversión. La IA ayuda a encontrar patrones; nuestros especialistas cuestionan los hallazgos y priorizan oportunidades con el contexto de tu negocio.",
+          offerOneMeta: "Interpretación de señales · criterio experto · decisiones priorizadas",
+          offerTwoTitle: "Pon la inteligencia a trabajar.",
+          offerTwoText: "Construimos agentes y flujos para calificar leads, asignarlos, dar seguimiento, generar reportes y asistir la producción de contenido. Las integraciones, los permisos y el escalamiento humano definen cómo opera cada flujo.",
+          offerTwoMeta: "Agentes conectados · flujos automatizados · aprobación humana",
+          offerThreeTitle: "Convierte cada acción en aprendizaje.",
+          offerThreeText: "Conectamos registros de ejecución, experimentos y resultados comerciales. El reporting automatizado hace visibles las señales; los expertos B&B revisan excepciones y ajustan campañas, journeys y reglas de los agentes.",
+          offerThreeMeta: "Ciclos de aprendizaje · experimentación controlada · criterio experto",
+          offerGuardrail: "La automatización se configura por caso de uso. Antes de activarla acordamos fuentes de datos, permisos, puntos de aprobación, métricas de éxito y rutas de escalamiento.",
+          offerCta: "Diseñemos tu sistema de crecimiento",
+          lineupLabel: "Activa la intención. Conecta cada siguiente paso.",
+          lineupTitle: "Construye el sistema que tu siguiente etapa necesita.",
+          lineupText: "Combina estrategia, demanda, señales confiables, experiencias y software alrededor del reto de tu negocio. Explora el papel de cada producto.",
+          clientsTitle: "El reto. Nuestro aporte. La evidencia.",
+          clientsText: "El valor de cada colaboración está en el trabajo: el reto de negocio, los productos B&B involucrados y la evidencia del cambio. Estas son las compañías detrás de los proyectos que documentaremos.",
+          manifesto: "Experiencia humana. Ejecución agéntica. Crecimiento conectado.",
+          manifestoText: "El conocimiento de nuestro equipo guía la estrategia, las decisiones creativas y las reglas de automatización. La tecnología extiende esa experiencia a los momentos que importan para tus clientes."
+        });
+      }
+
       // 3. Product Lineup Catalog (8 Products)
       const lineup = [
         ["growth-blueprint","strategy","network","B&B Growth Blueprint","Diagnóstico y estrategia","Diagnosis & strategy","Identifica oportunidades y convierte el diagnóstico en un plan de crecimiento priorizado.","Identify opportunities and turn diagnosis into a prioritized growth roadmap.",["Auditoría estratégica y de funnel","Arquitectura de campañas omnicanal","Audiencias, canales y presupuesto","Roadmap con responsables y KPI","Metodología y capacitación"],["Strategy and funnel audit","Omnichannel campaign architecture","Audiences, channels and budget","Roadmap with owners and KPIs","Methodology and team training"]],
@@ -2908,6 +3019,23 @@
       function renderCopy() {
         const active = copy[state.lang];
         document.documentElement.lang = state.lang;
+        if (rootLineup) rootLineup.dataset.abVariant = state.variant;
+        const offerSection = document.getElementById("bb-offer");
+        if (offerSection) {
+          offerSection.hidden = state.variant !== "B";
+          if (state.variant === "B") {
+            const steps = state.lang === "es"
+              ? ["01 / INTERPRETAR", "02 / ACTIVAR", "03 / APRENDER"]
+              : ["01 / SENSE", "02 / ACT", "03 / LEARN"];
+            offerSection.querySelectorAll(".bb-offer-steps article > span").forEach((el, i) => {
+              el.textContent = steps[i];
+            });
+            const offerCtaEl = offerSection.querySelector(".bb-offer-cta");
+            if (offerCtaEl) {
+              offerCtaEl.href = "mailto:info@brandandbyte.com?subject=Agentic%20Growth%20Systems";
+            }
+          }
+        }
         try {
           localStorage.setItem("bb_lang", state.lang);
         } catch (e) {
@@ -2915,7 +3043,6 @@
         }
 
         // Journey tags
-        const arrowNeSvg = '<svg class="bb-inline-arrow" width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11L11 3M5.25 3H11v5.75"/></svg>';
         const journeyLabels = state.lang === "es"
           ? ["Inspirar", "Ser encontrado", "Generar confianza", "Convertir", "Medir y aprender"]
           : ["Inspire", "Get discovered", "Earn trust", "Convert", "Measure and learn"];
@@ -2927,7 +3054,9 @@
         document.querySelectorAll("[data-copy]").forEach((node) => {
           const key = node.dataset.copy;
           if (!(key in active)) return;
-          if (key === "title" || key.endsWith("Title")) {
+          if (key === "offerCta") {
+            node.innerHTML = active[key] + " " + arrowNeSvg;
+          } else if (key === "title" || key.endsWith("Title")) {
             node.innerHTML = active[key];
           } else {
             node.textContent = active[key];
