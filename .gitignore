@@ -1,0 +1,9 @@
+.agents/
+.wrangler/
+node_modules/
+oldwebsite/
+tests/
+PROJECT.md
+TEST_INFRA.md
+TEST_READY.md
+.DS_Store
