@@ -1330,6 +1330,51 @@
     }
 
     #bb-product-lineup * { box-sizing: border-box; min-width: 0; }
+    #bb-product-lineup .bb-product.bb-lab-expanded { grid-column: 1 / -1; background: var(--bb-dark); color: white; }
+    #bb-product-lineup .bb-lab-expanded > p { max-width: 750px; color: #dedee3; }
+    #bb-product-lineup .bb-lab-expanded > .bb-product-open { color: white; }
+    #bb-product-lineup .bb-lab-expanded > .bb-product-open span { background: var(--bb-green); color: var(--bb-dark); }
+    #bb-product-lineup .bb-lab { margin: 26px 0 0; background: var(--bb-dark); color: white; border-top: 1px solid #62636d; padding: 24px 0 0; }
+    #bb-product-lineup .bb-lab-sections { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    #bb-product-lineup .bb-lab-sections button { border: 1px solid #62636d; background: transparent; color: white; border-radius: 24px; padding: 12px 18px; min-height: 44px; cursor: pointer; }
+    #bb-product-lineup .bb-lab-sections button[aria-pressed="true"] { background: var(--bb-green); color: var(--bb-dark); border-color: var(--bb-green); }
+    #bb-product-lineup .bb-lab-panel[hidden] { display: none; }
+    #bb-product-lineup .bb-lab-panel { animation: bb-panel-in .2s ease-out; }
+    @keyframes bb-panel-in { from { transform: translateY(6px); } to { transform: translateY(0); } }
+    #bb-product-lineup .bb-product .bb-lab .bb-solution h3 { background: transparent; color: var(--bb-dark); font-size: clamp(25px,3vw,36px); font-weight: 500; line-height: 1.15; margin: 0 0 18px; max-width: 100%; }
+    #bb-product-lineup .bb-product .bb-lab .bb-solution p { color: var(--bb-dark); margin: 12px 0; line-height: 1.6; }
+    #bb-product-lineup .bb-lab-expanded .bb-lab-panel > h3 { background: transparent; color: white; font-size: 24px; margin: 24px 0 12px; }
+    #bb-product-lineup .bb-lab-eyebrow { color: var(--bb-green); text-transform: uppercase; letter-spacing: .12em; font-size: 12px; }
+    #bb-product-lineup .bb-lab h2 { font-size: clamp(34px,5vw,58px); line-height: 1.05; font-weight: 500; margin: 18px 0; max-width: 800px; }
+    #bb-product-lineup .bb-product .bb-lab p { line-height: 1.6; margin: 12px 0; }
+    #bb-product-lineup .bb-lab-intro { max-width: 700px; color: #d7d7dc; }
+    #bb-product-lineup .bb-lab-grid { display: grid; grid-template-columns: 230px 1fr; gap: 24px; margin: 32px 0; }
+    #bb-product-lineup .bb-lab-nav { display: flex; flex-direction: column; gap: 8px; }
+    #bb-product-lineup .bb-lab-nav button { border: 1px solid #62636d; background: transparent; color: white; border-radius: 14px; padding: 15px; text-align: left; min-height: 48px; cursor: pointer; }
+    #bb-product-lineup .bb-lab-nav button[aria-pressed="true"] { color: var(--bb-dark); background: var(--bb-green); border-color: var(--bb-green); }
+    #bb-product-lineup .bb-solution { background: var(--bb-gray); color: var(--bb-dark); border-radius: 24px; padding: clamp(22px,3vw,34px); }
+    #bb-product-lineup .bb-solution h3 { font-size: clamp(25px,3vw,36px); font-weight: 500; line-height: 1.15; margin: 0 0 18px; }
+    #bb-product-lineup .bb-solution ul { padding-left: 20px; display: grid; gap: 10px; line-height: 1.4; margin: 16px 0; }
+    #bb-product-lineup .bb-solution small { display: block; border-top: 1px solid #babac0; padding-top: 18px; font-size: 13px; line-height: 1.5; }
+    #bb-product-lineup .bb-lab-models { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 22px; }
+    #bb-product-lineup .bb-lab-models article { border-top: 2px solid var(--bb-green); padding: 18px 0; }
+    #bb-product-lineup .bb-lab-models h4 { color: var(--bb-green); font-size: 22px; font-weight: 500; margin: 0; }
+    #bb-product-lineup .bb-product .bb-lab .bb-lab-models p { font-size: 14px; color: #d7d7dc; margin: 10px 0 0; }
+    #bb-product-lineup .bb-lab-process { display: flex; flex-wrap: wrap; gap: 12px; border-top: 1px solid #62636d; padding-top: 24px; margin-top: 16px; }
+    #bb-product-lineup .bb-lab-process span { flex: 1 1 130px; font-size: 14px; }
+    #bb-product-lineup .bb-lab details { border-top: 1px solid #62636d; padding: 18px 0; }
+    #bb-product-lineup .bb-lab summary { font-size: 16px; padding: 6px 0; cursor: pointer; }
+    #bb-product-lineup .bb-lab-link { display: inline-block; color: var(--bb-dark); background: var(--bb-green); border-radius: 12px; padding: 16px 20px; text-decoration: none; grid-column: 1/-1; font-weight: 500; }
+    #bb-product-lineup .bb-lab .bb-lab-link { margin-top: 24px; }
+    @media(max-width:700px) {
+      #bb-product-lineup .bb-lab-grid { grid-template-columns: 1fr; }
+      #bb-product-lineup .bb-lab-nav { display: grid; grid-template-columns: 1fr 1fr; }
+      #bb-product-lineup .bb-lab-models { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:400px) {
+      #bb-product-lineup .bb-lab-nav, #bb-product-lineup .bb-lab-models { grid-template-columns: 1fr; }
+      #bb-product-lineup .bb-lab-sections button { padding: 10px 12px; font-size: 14px; }
+    }
     #bb-product-lineup .bb-hook { font-size: 19px !important; font-weight: 500; margin-bottom: 14px !important; }
     #bb-product-lineup .bb-receive { margin-top: 22px; padding-top: 16px; border-top: 1px solid #ccc; font-size: 14px; }
     #bb-product-lineup .bb-receive strong { text-transform: uppercase; letter-spacing: .04em; font-size: 12px; }
@@ -2562,7 +2607,9 @@
       const state = {
         lang: initialLang,
         filter: "all",
-        selected: null
+        selected: null,
+        solution: 0,
+        labView: 0
       };
 
       // 2. Bilingual Dictionary
@@ -2736,10 +2783,10 @@
       ];
 
       const commercial = [
-        ["¿Dónde está frenando tu crecimiento?","Where is growth getting stuck?","Inversión dispersa, prioridades que compiten y un funnel sin diagnóstico compartido.","Scattered investment, competing priorities and no shared funnel diagnosis.","Plan de acción priorizado, responsables y gobernanza de canales.","Prioritized action plan, ownership and channel governance.","Alineación comercial · foco de inversión · velocidad de ejecución","Commercial alignment · investment focus · execution speed"],
-        ["Cuando preguntan por tu categoría, ¿qué dice la IA?","When buyers ask about your category, what does AI say?","Tu marca no aparece, se cita a la competencia o se usan fuentes desactualizadas.","Your brand is missing, competitors get cited, or outdated sources get used.","Entidades optimizadas, claims verificables y contenido estructurado para AEO y GEO.","Optimized entities, verifiable claims and structured content for AEO and GEO.","Presencia en IA · menciones de marca · tráfico citable","AI presence · brand mentions · citable traffic"],
-        ["Haz que cada campaña deje un aprendizaje medible.","Make every campaign produce a measurable learning.","Campañas reactivas, presupuestos fragmentados y poca claridad de qué funciona.","Reactive campaigns, fragmented budgets and little clarity on what works.","Estructura escalable de medios, matriz de testing y control de inversión.","Scalable media structure, testing matrix and spend controls.","CPA eficiente · tasa de aprendizaje · volumen de demanda","Efficient CPA · learning velocity · demand volume"],
-        ["La intención ya existe. Elimina la fricción para convertirla.","Intent is already there. Remove the friction to convert it.","Tráfico calificado que llega a experiencias lentas, confusas o sin propuesta clara.","Qualified traffic lands on slow, confusing pages with no clear offer.","Experiencias web y backlog CRO conectados al objetivo comercial.","Web experiences and a CRO backlog tied to the commercial goal.","CVR · abandono · ingreso por visita","CVR · abandonment · revenue per visit"],
+        ["¿Dónde está frenando tu crecimiento?","Where is growth getting stuck?","Inversión dispersa, prioridades que compiten y un funnel sin diagnóstico compartido.","Scattered investment, competing priorities and no shared funnel diagnosis.","Plan de acción priorizado, responsables y criterios de medición.","A prioritized action plan, owners and measurement criteria.","Prioridades ejecutadas · cobertura de medición","Priorities delivered · measurement coverage"],
+        ["Cuando preguntan por tu categoría, ¿aparece tu marca?","When buyers ask about your category, does your brand show up?","Tu expertise existe, pero tus señales digitales no siempre lo hacen visible ni verificable.","Your expertise exists, but your digital signals may not make it visible or verifiable.","Auditoría FameCheck, mapa de evidencia y backlog SEO / GEO / AEO.","FameCheck audit, evidence map and SEO / GEO / AEO backlog.","Presencia y citas en una muestra definida de consultas","Presence and citations across a defined query sample"],
+        ["Haz que cada campaña deje un aprendizaje.","Make every campaign produce a learning.","La pauta escala sin una hipótesis clara, QA consistente o conexión con las ventas.","Media scales without clear hypotheses, consistent QA or a connection to sales.","Campañas implementadas, matriz A/B y criterios de optimización.","Implemented campaigns, an A/B matrix and optimization criteria.","CAC · demanda calificada · ROAS atribuido","CAC · qualified demand · attributed ROAS"],
+        ["La intención ya existe. Elimina la fricción.","Intent is already there. Remove the friction.","El anuncio genera interés; la landing, el formulario o el checkout pierde la oportunidad.","The ad creates interest; the landing page, form or checkout loses the opportunity.","Experiencias web y backlog CRO conectados al objetivo comercial.","Web experiences and a CRO backlog tied to the commercial goal.","CVR · abandono · ingreso por visita","CVR · abandonment · revenue per visit"],
         ["Del clic a la venta. Conecta la evidencia.","From click to sale. Connect the evidence.","Medios, CRM y finanzas cuentan versiones distintas del mismo negocio.","Media, CRM and finance tell different stories about the same business.","Plan de eventos, CAPI, trazabilidad y reporting de inversión vs. forecast.","Event plan, CAPI, traceability and spend-versus-forecast reporting.","Calidad de eventos · conciliación · cobertura de atribución","Event quality · reconciliation · attribution coverage"],
         ["Que el siguiente paso llegue a tiempo.","Make the next step happen on time.","Los leads esperan, los seguimientos se pierden y las oportunidades de recompra no se activan.","Leads wait, follow-ups get lost and repeat-purchase opportunities go untriggered.","Journeys, triggers y reglas de asignación conectados al CRM.","Journeys, triggers and routing rules connected to the CRM.","Tiempo de respuesta · avance de pipeline · retención","Response time · pipeline progression · retention"],
         ["Ideas que se convierten en puntos de contacto.","Ideas that become customer touchpoints.","El volumen creativo crece, pero faltan una hipótesis, consistencia de marca y aprendizaje.","Creative volume grows, but hypotheses, brand consistency and learning are missing.","Sistema editorial, variantes creativas, safe zones y QA humano.","Editorial system, creative variants, safe zones and human QA.","Velocidad de testing · conversiones asistidas · eficiencia de producción","Testing velocity · assisted conversions · production efficiency"],
@@ -2774,10 +2821,89 @@
         }
       }));
 
+      products[7].es.desc = 'Diseñamos y desarrollamos plataformas, aplicaciones y automatizaciones que conectan tu operación con el crecimiento.';
+      products[7].en.desc = 'We design and build platforms, applications and automations that connect your operations to growth.';
+      products[7].es.includes = ['Software a medida, portales y marketplaces','Web, e-commerce y sistemas de reservas','Agentes IA, RAG y automatización de procesos','APIs e integraciones con CRM, ERP y PMS','Arquitectura de datos, QA, despliegue y evolución'];
+      products[7].en.includes = ['Custom software, portals and marketplaces','Web, e-commerce and booking systems','AI agents, RAG and process automation','APIs and CRM, ERP and PMS integrations','Data architecture, QA, deployment and evolution'];
+      products[7].es.delivery = 'Discovery, arquitectura, producto implementado, integraciones, documentación y roadmap de evolución según el alcance acordado.';
+      products[7].en.delivery = 'Discovery, architecture, implemented product, integrations, documentation and an evolution roadmap within the agreed scope.';
+
+      const solutions = [
+        {name:'Automotive Commerce Platform',labels:['Automotriz','Automotive'],es:['Del inventario a la oportunidad comercial.',['Catálogo de vehículos y fichas de detalle','Backoffice de inventario, medios y permisos','Simulador de financiamiento y captura de leads','Publicación en marketplaces y analítica comercial'],'Demand Engine + Conversion Engine + Signal Layer'],en:['From inventory to sales opportunity.',['Vehicle catalog and detail pages','Inventory, media and permissions backoffice','Financing simulator and lead capture','Marketplace publishing and commercial analytics'],'Demand Engine + Conversion Engine + Signal Layer']},
+        {name:'Hospitality & Booking Platform',labels:['Hospitality','Hospitality'],es:['Conecta descubrimiento, reserva y operación.',['Catálogo de propiedades y disponibilidad','Motor de reservas, calendarios y pagos','Integración con PMS / Guesty y gestión de huéspedes','Comunicaciones automatizadas y reportes de ocupación'],'Conversion Engine + Lifecycle Engine + Signal Layer'],en:['Connect discovery, booking and operations.',['Property catalog and availability','Booking engine, calendars and payments','PMS / Guesty integration and guest management','Automated communications and occupancy reports'],'Conversion Engine + Lifecycle Engine + Signal Layer']},
+        {name:'AI Customer Operations',labels:['Operaciones con IA','AI operations'],es:['Responde con contexto. Escala con criterio.',['Agentes en WhatsApp y webchat','Base de conocimiento empresarial y RAG','Calificación de leads e integración CRM / helpdesk','Escalamiento humano, historial y analítica'],'Truth Engine + Lifecycle Engine'],en:['Respond with context. Scale with judgment.',['WhatsApp and webchat agents','Enterprise knowledge base and RAG','Lead qualification and CRM / helpdesk integration','Human escalation, history and analytics'],'Truth Engine + Lifecycle Engine']},
+        {name:'Enterprise Content & Experience',labels:['Contenido empresarial','Enterprise content'],es:['Una operación editorial para múltiples marcas.',['CMS modular y gestión de múltiples sitios','Componentes, contenido dinámico y biblioteca de medios','Roles, permisos y programación de publicaciones','SEO, formularios e integración de experiencias'],'Content Engine + Truth Engine + Conversion Engine'],en:['One editorial operation for multiple brands.',['Modular CMS and multi-site management','Components, dynamic content and media library','Roles, permissions and scheduled publishing','SEO, forms and experience integration'],'Content Engine + Truth Engine + Conversion Engine']},
+        {name:'Growth Intelligence Platform',labels:['Inteligencia de negocio','Growth intelligence'],es:['Une inversión, pipeline e ingresos.',['Conexiones con Google Ads, Meta, GA4 y CRM','Seguimiento de leads, oportunidades y conversiones','CPL, CAC y atribución de ingresos','Reportes automatizados y alertas'],'Signal Layer + Growth Blueprint + Demand Engine'],en:['Connect spend, pipeline and revenue.',['Google Ads, Meta, GA4 and CRM connections','Lead, opportunity and conversion tracking','CPL, CAC and revenue attribution','Automated reporting and alerts'],'Signal Layer + Growth Blueprint + Demand Engine']},
+        {name:'Workflow & Automation OS',labels:['Workflows y sistemas','Workflows & systems'],es:['Haz que tus sistemas trabajen juntos.',['Automatización de tareas con n8n, APIs y webhooks','Integración ERP / CRM y sincronización de datos','Formularios, documentos y aprobaciones internas','Notificaciones y monitoreo de ejecuciones'],'Lifecycle Engine + Signal Layer'],en:['Make your systems work together.',['Task automation with n8n, APIs and webhooks','ERP / CRM integration and data synchronization','Forms, documents and internal approvals','Notifications and execution monitoring'],'Lifecycle Engine + Signal Layer']}
+      ];
+
       // 4. Render Functions
       const productsEl = document.getElementById("bb-products");
       const detailEl = document.getElementById("bb-detail");
       const rootLineup = document.getElementById("bb-product-lineup");
+      const arrowNeSvg = '<svg class="bb-inline-arrow" width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11L11 3M5.25 3H11v5.75"/></svg>';
+
+      function renderLab() {
+        const lab = rootLineup.querySelector('#bb-lab');
+        if (!lab) return;
+        const es = state.lang === 'es';
+        const s = solutions[state.solution] || solutions[0], t = s[state.lang];
+        const models = es
+          ? [['Launch','Web, landing, CMS o MVP: del alcance al lanzamiento.'],['Scale','Plataformas, portales, marketplaces y e-commerce conectados.'],['Intelligence','Agentes IA, conocimiento RAG e integraciones inteligentes.'],['Continuous','Mantenimiento, infraestructura, soporte y optimización.']]
+          : [['Launch','Web, landing, CMS or MVP: from scope to launch.'],['Scale','Connected platforms, portals, marketplaces and e-commerce.'],['Intelligence','AI agents, RAG knowledge and intelligent integrations.'],['Continuous','Maintenance, infrastructure, support and optimization.']];
+        lab.innerHTML =
+          '<div class="bb-lab-eyebrow">08 / B&B Product Lab</div>' +
+          '<h2>' + (es ? 'El crecimiento también<br>se construye en código.' : 'Growth is also<br>built in code.') + '</h2>' +
+          '<p class="bb-lab-intro">' + (es ? 'Ingeniería de software, experiencias digitales, IA y datos. Una base configurable, adaptada a tu industria e integrada a tu operación.' : 'Software engineering, digital experiences, AI and data. A configurable foundation, adapted to your industry and integrated with your operations.') + '</p>' +
+          '<div class="bb-lab-grid">' +
+            '<div class="bb-lab-nav" aria-label="Solutions">' +
+              solutions.map((v,i) => '<button type="button" data-solution="' + i + '" aria-pressed="' + (state.solution === i) + '">' + String(i+1).padStart(2,'0') + ' / ' + v.labels[es ? 0 : 1] + '</button>').join('') +
+            '</div>' +
+            '<div class="bb-solution" aria-live="polite">' +
+              '<h3>' + s.name + '</h3>' +
+              '<p>' + t[0] + '</p>' +
+              '<ul>' + t[1].map(v => '<li>' + v + '</li>').join('') + '</ul>' +
+              '<small>' + (es ? 'Conecta con: ' : 'Connects with: ') + t[2] + '</small>' +
+            '</div>' +
+          '</div>' +
+          '<p class="bb-lab-intro">' + (es ? 'Soluciones configurables. El alcance, las integraciones y los requisitos de cada negocio se definen en discovery.' : 'Configurable solutions. Scope, integrations and business requirements are defined during discovery.') + '</p>' +
+          '<h3>' + (es ? 'Elige cómo construir tu siguiente etapa.' : 'Choose how to build your next stage.') + '</h3>' +
+          '<div class="bb-lab-models">' + models.map(m => '<article><h4>' + m[0] + '</h4><p>' + m[1] + '</p></article>').join('') + '</div>' +
+          '<details><summary>' + (es ? 'Capacidades y estándares de entrega' : 'Capabilities and delivery standards') + '</summary><p>' + (es ? 'Software y plataformas · Web y experiencias digitales · IA y automatización · Data e inteligencia · Growth y performance.' : 'Software and platforms · Web and digital experiences · AI and automation · Data and intelligence · Growth and performance.') + '</p><p>React / TypeScript · NestJS / Node.js · PostgreSQL · APIs · n8n · AWS / Cloudflare</p><p>' + (es ? 'Arquitectura y seguridad, revisión de código, QA, despliegue, monitoreo, documentación y handoff.' : 'Architecture and security, code review, QA, deployment, monitoring, documentation and handoff.') + '</p></details>' +
+          '<details><summary>' + (es ? 'Ecosistema de productos B&B' : 'B&B product ecosystem') + '</summary><p>FameCheck · OnTable · Pulso · Creatio Motor · MIA On Air · MIA Studio · MIA Reporting</p><p>' + (es ? 'La solución se configura según los productos e integraciones pertinentes para tu alcance.' : 'The solution is configured around the products and integrations relevant to your scope.') + '</p></details>' +
+          '<div class="bb-lab-process">' + ['Discover','Design','Build','Launch','Optimize'].map((v,i) => '<span>0' + (i+1) + ' / ' + v + ' ' + arrowNeSvg + '</span>').join('') + '</div>' +
+          '<a class="bb-lab-link" href="mailto:info@brandandbyte.com?subject=B%26B%20Product%20Lab">' + (es ? 'Conversemos sobre tu producto ' : 'Let’s talk about your product ') + arrowNeSvg + '</a>';
+
+        const children = [...lab.children];
+        const panels = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
+        children.forEach((el,i) => {
+          if (i <= 2) el.remove();
+          else if (i <= 4) panels[0].appendChild(el);
+          else if (i <= 6 || el.classList.contains('bb-lab-process')) panels[1].appendChild(el);
+          else if (el.tagName === 'DETAILS') { el.open = true; panels[2].appendChild(el); }
+        });
+        const nav = document.createElement('div');
+        nav.className = 'bb-lab-sections';
+        nav.setAttribute('aria-label', es ? 'Explorar Product Lab' : 'Explore Product Lab');
+        nav.innerHTML = (es ? ['Soluciones','Implementación','Capacidades'] : ['Solutions','Delivery','Capabilities']).map((label,i) => '<button type="button" data-lab-view="' + i + '" aria-pressed="' + (state.labView === i) + '" aria-controls="bb-lab-panel-' + i + '">' + label + '</button>').join('');
+        lab.prepend(nav);
+        panels.forEach((panel,i) => {
+          panel.id = 'bb-lab-panel-' + i;
+          panel.hidden = state.labView !== i;
+          panel.className = 'bb-lab-panel';
+          lab.insertBefore(panel, lab.querySelector('.bb-lab-link'));
+        });
+        nav.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+          state.labView = Number(b.dataset.labView);
+          panels.forEach((p,i) => p.hidden = i !== state.labView);
+          nav.querySelectorAll('button').forEach((v,i) => v.setAttribute('aria-pressed', String(i === state.labView)));
+        }));
+        rootLineup.querySelectorAll('[data-solution]').forEach(b => b.addEventListener('click', () => {
+          state.solution = Number(b.dataset.solution);
+          renderLab();
+          rootLineup.querySelector('[data-solution="' + state.solution + '"]')?.focus({ preventScroll: true });
+        }));
+      }
 
       function renderCopy() {
         const active = copy[state.lang];
@@ -2826,7 +2952,14 @@
         productsEl.innerHTML = products.map((product, index) => {
           const text = product[state.lang];
           const hidden = state.filter !== "all" && state.filter !== product.category;
-          return '<article class="bb-product" data-category="' + product.category + '"' + (hidden ? ' hidden' : '') + '>' +
+          const isOpen = state.selected === product.id;
+          const openLabel = isOpen
+            ? (state.lang === "es" ? "Cerrar producto" : "Close product")
+            : active.open;
+          const openIcon = isOpen
+            ? "−"
+            : '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11L11 3M5.25 3H11v5.75"/></svg>';
+          return '<article class="bb-product' + (product.id === "product-lab" && isOpen ? " bb-lab-expanded" : "") + '" data-category="' + product.category + '"' + (hidden ? ' hidden' : '') + '>' +
             '<div class="bb-product-top">' +
               '<span class="bb-product-index">' + String(index + 1).padStart(2, "0") + ' · ' + text.line + '</span>' +
               '<span class="bb-product-icon" aria-hidden="true"><i data-lucide="' + product.icon + '"></i></span>' +
@@ -2834,8 +2967,8 @@
             '<h3>' + text.name + '</h3>' +
             '<p class="bb-hook">' + text.hook + '</p>' +
             '<p>' + text.desc + '</p>' +
-            '<button class="bb-product-open" type="button" data-product="' + product.id + '" aria-expanded="' + String(state.selected === product.id) + '">' +
-              active.open + ' <span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11L11 3M5.25 3H11v5.75"/></svg></span>' +
+            '<button class="bb-product-open" type="button" data-product="' + product.id + '" aria-expanded="' + String(isOpen) + '">' +
+              openLabel + ' <span aria-hidden="true">' + openIcon + '</span>' +
             '</button>' +
           '</article>';
         }).join("");
@@ -2849,9 +2982,11 @@
             state.selected = state.selected === button.dataset.product ? null : button.dataset.product;
             renderProducts();
             renderDetail();
-            if (state.selected) {
-              if (typeof detailEl.scrollIntoView === "function") detailEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            const target = state.selected === "product-lab" ? rootLineup.querySelector(".bb-lab-expanded") : detailEl;
+            if (state.selected && target && typeof target.scrollIntoView === "function") {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
             }
+            rootLineup.querySelector('[data-product="' + button.dataset.product + '"]')?.focus({ preventScroll: true });
           });
         });
       }
@@ -2864,6 +2999,16 @@
           return;
         }
         const text = product[state.lang];
+        if (product.id === "product-lab") {
+          detailEl.hidden = true;
+          detailEl.innerHTML = "";
+          const card = productsEl.querySelector('[data-product="product-lab"]').closest(".bb-product");
+          if (card && !card.querySelector("#bb-lab")) {
+            card.insertAdjacentHTML("beforeend", '<section id="bb-lab" class="bb-lab" aria-label="B&B Product Lab"></section>');
+          }
+          renderLab();
+          return;
+        }
         detailEl.hidden = false;
 
         const selectedCard = productsEl.querySelector('[data-product="' + product.id + '"]').closest(".bb-product");
