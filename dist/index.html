@@ -1332,8 +1332,9 @@
     #bb-product-lineup * { box-sizing: border-box; min-width: 0; }
     #bb-product-lineup .bb-product.bb-lab-expanded { grid-column: 1 / -1; background: var(--bb-dark); color: white; }
     #bb-product-lineup .bb-lab-expanded > p { max-width: 750px; color: #dedee3; }
-    #bb-product-lineup .bb-lab-expanded > .bb-product-open { color: white; }
-    #bb-product-lineup .bb-lab-expanded > .bb-product-open span { background: var(--bb-green); color: var(--bb-dark); }
+    #bb-product-lineup .bb-lab-expanded .bb-product-open { color: white; }
+    #bb-product-lineup .bb-lab-expanded .bb-product-open span { background: var(--bb-green); color: var(--bb-dark); }
+    #bb-product-lineup .bb-lab-expanded .bb-product-quote { background: rgba(255, 255, 255, 0.12); color: white; border-color: rgba(255, 255, 255, 0.45); }
     #bb-product-lineup .bb-lab { margin: 26px 0 0; background: var(--bb-dark); color: white; border-top: 1px solid #62636d; padding: 24px 0 0; }
     #bb-product-lineup .bb-lab-sections { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
     #bb-product-lineup .bb-lab-sections button { border: 1px solid #62636d; background: transparent; color: white; border-radius: 24px; padding: 12px 18px; min-height: 44px; cursor: pointer; }
@@ -1801,9 +1802,19 @@
       font-size: 15px;
     }
 
-    #bb-product-lineup .bb-product-open {
+    #bb-product-lineup .bb-product-foot {
       margin-top: auto;
       padding-top: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    #bb-product-lineup .bb-product-open {
+      margin-top: 0;
+      padding-top: 0;
       border: 0;
       background: transparent;
       color: inherit;
@@ -1813,6 +1824,43 @@
       gap: 8px;
       width: fit-content;
       font-weight: 500;
+      cursor: pointer;
+    }
+
+    #bb-product-lineup .bb-product-quote {
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 8px 14px;
+      min-height: 40px;
+      background: rgba(255, 255, 255, 0.75);
+      color: var(--bb-dark);
+      font-size: 13px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
+    }
+
+    #bb-product-lineup .bb-product:nth-child(4n) .bb-product-quote {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--bb-white);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    #bb-product-lineup .bb-product-quote:hover {
+      background: var(--bb-dark);
+      color: var(--bb-white);
+      border-color: var(--bb-dark);
+      transform: translateY(-2px);
+    }
+
+    #bb-product-lineup .bb-product:nth-child(4n) .bb-product-quote:hover,
+    #bb-product-lineup .bb-product.bb-lab-expanded .bb-product-quote:hover {
+      background: var(--bb-green);
+      color: var(--bb-dark);
+      border-color: var(--bb-green);
     }
 
     #bb-product-lineup .bb-product-open span {
@@ -2073,7 +2121,373 @@
     @media (prefers-reduced-motion: reduce) {
       #bb-product-lineup * { scroll-behavior: auto !important; transition: none !important; }
     }
-  
+
+    /* Brand&Byte Growth Chat Modal / Wizard */
+    #bb-chat-modal[hidden] {
+      display: none !important;
+    }
+    #bb-chat-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(25, 26, 35, 0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font: 15px "Space Grotesk", sans-serif;
+      color: #191a23;
+    }
+    #bb-chat-modal * {
+      box-sizing: border-box;
+    }
+    #bb-chat-modal .bb-chat-app {
+      width: min(100%, 840px);
+      height: min(88vh, 760px);
+      background: #ffffff;
+      border: 1px solid #191a23;
+      border-radius: 28px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35), 0 6px 0 #b9ff66;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: bb-chat-in 0.2s ease-out;
+    }
+    @keyframes bb-chat-in {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    #bb-chat-modal .bb-chat-head {
+      height: 66px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      border-bottom: 1px solid #e8e8eb;
+      background: #ffffff;
+    }
+    #bb-chat-modal .bb-chat-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+    #bb-chat-modal .bb-chat-logo {
+      width: 30px;
+      height: 30px;
+      background: #b9ff66;
+      border: 2px solid #191a23;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #191a23;
+    }
+    #bb-chat-modal .bb-chat-head small {
+      font-size: 12px;
+      color: #747680;
+      font-weight: 400;
+    }
+    #bb-chat-modal .bb-chat-head-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    #bb-chat-modal .bb-chat-close {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid #dedee2;
+      background: #f7f7f8;
+      color: #191a23;
+      font-size: 16px;
+      font-weight: 600;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    #bb-chat-modal .bb-chat-close:hover {
+      background: #b9ff66;
+      border-color: #191a23;
+    }
+    #bb-chat-modal .bb-chat-scroll {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    #bb-chat-modal .bb-chat-body {
+      width: min(100%, 680px);
+      padding: 28px 22px 16px;
+      margin: 0 auto;
+      flex: 1;
+    }
+    #bb-chat-modal .bb-chat-welcome {
+      text-align: center;
+      padding: 8px 0 22px;
+    }
+    #bb-chat-modal .bb-chat-orb {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 15px;
+      border-radius: 16px;
+      background: #b9ff66;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+    }
+    #bb-chat-modal .bb-chat-context-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f3fae9;
+      border: 1px solid #191a23;
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    #bb-chat-modal .bb-chat-context-badge[hidden] {
+      display: none !important;
+    }
+    #bb-chat-modal .bb-chat-welcome h2 {
+      font-size: 27px;
+      line-height: 1.15;
+      font-weight: 500;
+      margin: 0 0 9px;
+      color: #191a23;
+    }
+    #bb-chat-modal .bb-chat-welcome p {
+      color: #747680;
+      line-height: 1.5;
+      margin: 0 auto;
+      max-width: 500px;
+    }
+    #bb-chat-modal .bb-chat-thread {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 8px 0 22px;
+    }
+    #bb-chat-modal .bb-chat-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    #bb-chat-modal .bb-chat-avatar {
+      flex: none;
+      width: 27px;
+      height: 27px;
+      border-radius: 9px;
+      background: #b9ff66;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+    }
+    #bb-chat-modal .bb-chat-bubble {
+      max-width: 90%;
+      line-height: 1.55;
+      padding: 4px 0;
+      color: #191a23;
+      background: transparent;
+      border-radius: 0;
+    }
+    #bb-chat-modal .bb-chat-row.user {
+      justify-content: flex-end;
+    }
+    #bb-chat-modal .bb-chat-row.user .bb-chat-bubble {
+      background: #f2f2f3;
+      padding: 11px 14px;
+      border-radius: 17px;
+    }
+    #bb-chat-modal .bb-chat-choices,
+    #bb-chat-modal .bb-chat-inline {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 8px 0 0 37px;
+    }
+    #bb-chat-modal .bb-chat-choices button {
+      background: #ffffff;
+      border: 1px solid #dedee2;
+      border-radius: 18px;
+      padding: 9px 13px;
+      font: inherit;
+      font-size: 13px;
+      color: #191a23;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    #bb-chat-modal .bb-chat-choices button:hover {
+      border-color: #191a23;
+      background: #b9ff66;
+    }
+    #bb-chat-modal .bb-chat-inline input {
+      min-width: 0;
+      flex: 1;
+      border: 1px solid #dadbe0;
+      border-radius: 12px;
+      padding: 11px 13px;
+      font: inherit;
+      color: #191a23;
+      background: #ffffff;
+    }
+    #bb-chat-modal .bb-chat-inline input:focus {
+      outline: 2px solid #b9ff66;
+      border-color: #191a23;
+    }
+    #bb-chat-modal .bb-chat-inline button {
+      border: 0;
+      border-radius: 12px;
+      background: #191a23;
+      color: #ffffff;
+      padding: 0 16px;
+      min-height: 42px;
+      font: inherit;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    #bb-chat-modal .bb-chat-inline button:hover {
+      background: #b9ff66;
+      color: #191a23;
+    }
+    #bb-chat-modal .bb-chat-error {
+      color: #bd2838;
+      font-size: 12px;
+      margin: 3px 0 0 37px;
+    }
+    #bb-chat-modal .bb-chat-compose-wrap {
+      padding: 16px 16px 15px;
+      background: #ffffff;
+      border-top: 1px solid #f0f0f3;
+      flex-shrink: 0;
+    }
+    #bb-chat-modal .bb-chat-compose {
+      width: min(100%, 680px);
+      margin: 0 auto;
+      border: 1px solid #d9d9de;
+      border-radius: 24px;
+      padding: 7px 9px;
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      box-shadow: 0 4px 18px rgba(27, 27, 36, 0.06);
+      background: #ffffff;
+    }
+    #bb-chat-modal .bb-chat-compose textarea {
+      border: 0;
+      outline: 0;
+      resize: none;
+      flex: 1;
+      min-height: 38px;
+      max-height: 100px;
+      padding: 8px 5px;
+      font: inherit;
+      color: #191a23;
+      background: transparent;
+    }
+    #bb-chat-modal .bb-chat-icon,
+    #bb-chat-modal .bb-chat-send {
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    #bb-chat-modal .bb-chat-icon {
+      background: transparent;
+      color: #191a23;
+    }
+    #bb-chat-modal .bb-chat-icon svg {
+      width: 21px;
+      height: 21px;
+      stroke: currentColor;
+    }
+    #bb-chat-modal .bb-chat-icon.recording {
+      background: #ffe4e6;
+      color: #d33;
+    }
+    #bb-chat-modal .bb-chat-send {
+      background: #191a23;
+      color: #ffffff;
+      font-size: 19px;
+    }
+    #bb-chat-modal .bb-chat-send:hover {
+      background: #b9ff66;
+      color: #191a23;
+    }
+    #bb-chat-modal .bb-chat-foot {
+      text-align: center;
+      color: #92949d;
+      font-size: 11px;
+      padding-top: 8px;
+    }
+    #bb-chat-modal .bb-chat-audio {
+      background: #f2f2f3;
+      border-radius: 14px;
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+    #bb-chat-modal .bb-chat-audio audio {
+      display: block;
+      width: 240px;
+      height: 34px;
+      margin-top: 6px;
+    }
+    #bb-chat-modal .bb-chat-status {
+      width: min(100%, 680px);
+      margin: 10px auto 0;
+      font-size: 13px;
+      padding: 12px 14px;
+      background: #f3fae9;
+      border: 1px solid #b9ff66;
+      border-radius: 12px;
+      display: none;
+    }
+    #bb-chat-modal .bb-chat-status.error {
+      background: #fff0f0;
+      border-color: #f5c2c7;
+      color: #a22;
+    }
+    @media (max-width: 640px) {
+      #bb-chat-modal {
+        padding: 0;
+      }
+      #bb-chat-modal .bb-chat-app {
+        width: 100%;
+        height: 100dvh;
+        max-height: 100dvh;
+        border-radius: 0;
+        border: 0;
+        box-shadow: none;
+      }
+      #bb-chat-modal .bb-chat-head {
+        padding: 0 15px;
+      }
+      #bb-chat-modal .bb-chat-head-right > small {
+        display: none;
+      }
+      #bb-chat-modal .bb-chat-body {
+        padding: 22px 15px 10px;
+      }
+      #bb-chat-modal .bb-chat-welcome h2 {
+        font-size: 24px;
+      }
+      #bb-chat-modal .bb-chat-compose-wrap {
+        padding: 12px 10px 14px;
+      }
+      #bb-chat-modal .bb-chat-choices,
+      #bb-chat-modal .bb-chat-inline {
+        margin-left: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2106,7 +2520,7 @@
           <button type="button" class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
         </div>
 
-        <a href="https://wa.me/19296413700" target="_blank" rel="noopener noreferrer" class="btn-secondary nav-cta-btn min-h-[44px] px-8 py-4" data-copy="navCta">
+        <a href="#growth-chat" class="btn-secondary nav-cta-btn min-h-[44px] px-8 py-4" data-copy="navCta" data-open-chat="General">
           Solicitar cotización
         </a>
 
@@ -2128,7 +2542,7 @@
         <li><a href="#contact" class="mobile-nav-link" data-copy="navContact">Contacto</a></li>
       </ul>
       <div>
-        <a href="https://wa.me/19296413700" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%; text-align: center;" data-copy="navCta">
+        <a href="#growth-chat" class="btn-primary" style="width: 100%; text-align: center;" data-copy="navCta" data-open-chat="General">
           Solicitar cotización
         </a>
       </div>
@@ -2207,7 +2621,7 @@
           </div>
           <div class="bb-offer-foot">
             <p data-copy="offerGuardrail">La automatización se configura por caso de uso. Antes de activarla acordamos fuentes de datos, permisos, puntos de aprobación, métricas de éxito y rutas de escalamiento.</p>
-            <a class="bb-offer-cta" href="mailto:info@brandandbyte.com?subject=Agentic%20Growth%20Systems" data-copy="offerCta">Diseñemos tu sistema de crecimiento</a>
+            <a class="bb-offer-cta" href="#growth-chat" data-copy="offerCta" data-open-chat="Agentic Growth Systems">Diseñemos tu sistema de crecimiento</a>
           </div>
         </section>
 
@@ -2286,7 +2700,7 @@
               En nuestra agencia enfocada en crecimiento, combinamos Tecnología, Marketing, Datos y Creación de Contenido para ayudar a las empresas a prosperar y triunfar en el panorama digital actual.
             </p>
             <div class="hero-cta-wrap">
-              <a href="https://wa.me/19296413700" target="_blank" rel="noopener noreferrer" class="btn-primary min-h-[44px] px-8 py-4" data-copy="heroCtaConsult">
+              <a href="#growth-chat" class="btn-primary min-h-[44px] px-8 py-4" data-copy="heroCtaConsult" data-open-chat="General">
                 Agendar una consulta
               </a>
               <a href="#lineup" class="btn-secondary" data-copy="heroCtaExplore">
@@ -2308,7 +2722,7 @@
           <div class="proposal-content">
             <h2 class="proposal-title" data-copy="proposalTitle">Hagamos que las cosas sucedan</h2>
             <p class="proposal-desc" data-copy="proposalDesc">Contáctanos hoy para descubrir cómo nuestros servicios de crecimiento pueden potenciar tu negocio y ayudarte a escalar online.</p>
-            <a href="#contact" class="btn-primary" data-copy="proposalCta">Hablemos de tus necesidades de crecimiento</a>
+            <a href="#growth-chat" class="btn-primary" data-copy="proposalCta" data-open-chat="General">Hablemos de tus necesidades de crecimiento</a>
           </div>
           <div class="proposal-image-wrap">
             <img src="assets/proposal-pic.png" alt="Growth Proposal" class="proposal-img" loading="lazy">
@@ -2653,6 +3067,46 @@
     </div>
   </footer>
 
+  <!-- BRANDBYTE GROWTH CHAT MODAL / WIZARD -->
+  <div id="bb-chat-modal" role="dialog" aria-modal="true" aria-labelledby="bb-chat-title" hidden>
+    <div class="bb-chat-app">
+      <header class="bb-chat-head">
+        <div class="bb-chat-brand">
+          <span class="bb-chat-logo" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11L11 3M5.25 3H11v5.75"/></svg>
+          </span>
+          Brand&amp;Byte <small>Growth chat</small>
+        </div>
+        <div class="bb-chat-head-right">
+          <small>Expert guided · AI assisted</small>
+          <button type="button" class="bb-chat-close" id="bb-chat-close" aria-label="Cerrar">✕</button>
+        </div>
+      </header>
+      <div class="bb-chat-scroll" id="bb-chat-scroll">
+        <section class="bb-chat-body">
+          <div class="bb-chat-welcome">
+            <div class="bb-chat-orb" aria-hidden="true">✳</div>
+            <div class="bb-chat-context-badge" id="bb-chat-context-badge" hidden></div>
+            <h2 id="bb-chat-title">¿Qué te gustaría<br>llevar al siguiente nivel?</h2>
+            <p id="bb-chat-subtitle">Cuéntanos con tus palabras o deja una nota de voz. Un especialista B&amp;B revisará tu contexto.</p>
+          </div>
+          <div class="bb-chat-thread" id="bb-chat-thread" aria-live="polite"></div>
+        </section>
+      </div>
+      <div class="bb-chat-compose-wrap">
+        <div class="bb-chat-compose">
+          <button type="button" class="bb-chat-icon" id="bb-chat-mic" aria-label="Grabar nota de voz">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"/></svg>
+          </button>
+          <textarea id="bb-chat-message" rows="1" placeholder="Escribe un mensaje…" aria-label="Escribe un mensaje"></textarea>
+          <button type="button" class="bb-chat-send" id="bb-chat-send" aria-label="Enviar">↑</button>
+        </div>
+        <div class="bb-chat-foot" id="bb-chat-foot">No necesitamos accesos a plataformas ni datos sensibles.</div>
+        <div id="bb-chat-status" class="bb-chat-status" role="status"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- SCRIPT LAYER: BRANDBYTE PRODUCT LINEUP + INTERACTIONS -->
   <script>
     (() => {
@@ -2995,7 +3449,7 @@
           '<details><summary>' + (es ? 'Capacidades y estándares de entrega' : 'Capabilities and delivery standards') + '</summary><p>' + (es ? 'Software y plataformas · Web y experiencias digitales · IA y automatización · Data e inteligencia · Growth y performance.' : 'Software and platforms · Web and digital experiences · AI and automation · Data and intelligence · Growth and performance.') + '</p><p>React / TypeScript · NestJS / Node.js · PostgreSQL · APIs · n8n · AWS / Cloudflare</p><p>' + (es ? 'Arquitectura y seguridad, revisión de código, QA, despliegue, monitoreo, documentación y handoff.' : 'Architecture and security, code review, QA, deployment, monitoring, documentation and handoff.') + '</p></details>' +
           '<details><summary>' + (es ? 'Ecosistema de productos B&B' : 'B&B product ecosystem') + '</summary><p>FameCheck · OnTable · Pulso · Creatio Motor · MIA On Air · MIA Studio · MIA Reporting</p><p>' + (es ? 'La solución se configura según los productos e integraciones pertinentes para tu alcance.' : 'The solution is configured around the products and integrations relevant to your scope.') + '</p></details>' +
           '<div class="bb-lab-process">' + ['Discover','Design','Build','Launch','Optimize'].map((v,i) => '<span>0' + (i+1) + ' / ' + v + ' ' + arrowNeSvg + '</span>').join('') + '</div>' +
-          '<a class="bb-lab-link" href="mailto:info@brandandbyte.com?subject=B%26B%20Product%20Lab">' + (es ? 'Conversemos sobre tu producto ' : 'Let’s talk about your product ') + arrowNeSvg + '</a>';
+          '<a class="bb-lab-link" href="#growth-chat" data-open-chat="B&B Product Lab · ' + s.name + '">' + (es ? 'Conversemos sobre tu producto ' : 'Let’s talk about your product ') + arrowNeSvg + '</a>';
 
         const children = [...lab.children];
         const panels = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
@@ -3044,7 +3498,8 @@
             });
             const offerCtaEl = offerSection.querySelector(".bb-offer-cta");
             if (offerCtaEl) {
-              offerCtaEl.href = "mailto:info@brandandbyte.com?subject=Agentic%20Growth%20Systems";
+              offerCtaEl.href = "#growth-chat";
+              offerCtaEl.dataset.openChat = "Agentic Growth Systems";
             }
           }
         }
@@ -3108,9 +3563,14 @@
             '<h3>' + text.name + '</h3>' +
             '<p class="bb-hook">' + text.hook + '</p>' +
             '<p>' + text.desc + '</p>' +
-            '<button class="bb-product-open" type="button" data-product="' + product.id + '" aria-expanded="' + String(isOpen) + '">' +
-              openLabel + ' <span aria-hidden="true">' + openIcon + '</span>' +
-            '</button>' +
+            '<div class="bb-product-foot">' +
+              '<button class="bb-product-open" type="button" data-product="' + product.id + '" aria-expanded="' + String(isOpen) + '">' +
+                openLabel + ' <span aria-hidden="true">' + openIcon + '</span>' +
+              '</button>' +
+              '<button class="bb-product-quote" type="button" data-open-chat="' + text.name + '">' +
+                (state.lang === "es" ? "Cotizar " : "Quote ") + arrowNeSvg +
+              '</button>' +
+            '</div>' +
           '</article>';
         }).join("");
 
@@ -3173,7 +3633,7 @@
             '<h4>' + active.scope + '</h4>' +
             '<ul class="bb-detail-list">' + text.includes.map((item) => '<li>' + item + '</li>').join("") + '</ul>' +
             '<div style="margin-top: 24px;">' +
-              '<a href="#contact" class="btn-primary" style="font-size: 0.95rem; padding: 12px 24px; min-height: 44px;">' +
+              '<a href="#growth-chat" class="btn-primary" data-open-chat="' + text.name + '" style="font-size: 0.95rem; padding: 12px 24px; min-height: 44px;">' +
                 (state.lang === "es" ? "Cotizar este producto →" : "Quote this product →") +
               '</a>' +
             '</div>' +
@@ -3408,6 +3868,451 @@
         setTimeout(() => {
           newsletterFeedback.style.display = "none";
         }, 5000);
+      });
+
+      // 8b. Brand&Byte Growth Chat Modal / Wizard
+      const chatModal = document.getElementById("bb-chat-modal");
+      const chatCloseBtn = document.getElementById("bb-chat-close");
+      const chatThread = document.getElementById("bb-chat-thread");
+      const chatMsg = document.getElementById("bb-chat-message");
+      const chatSendBtn = document.getElementById("bb-chat-send");
+      const chatMicBtn = document.getElementById("bb-chat-mic");
+      const chatStatusBox = document.getElementById("bb-chat-status");
+      const chatTitleEl = document.getElementById("bb-chat-title");
+      const chatSubtitleEl = document.getElementById("bb-chat-subtitle");
+      const chatFootEl = document.getElementById("bb-chat-foot");
+      const chatContextBadge = document.getElementById("bb-chat-context-badge");
+
+      let chatBrief = {};
+      let chatVoiceBlob = null;
+      let chatStarted = false;
+      let chatActiveContext = "";
+      let chatRec = null;
+      let chatStream = null;
+      let chatChunks = [];
+      let chatRecordBegin = 0;
+
+      const chatCopy = {
+        es: {
+          title: "¿Qué te gustaría<br>llevar al siguiente nivel?",
+          subtitle: "Cuéntanos con tus palabras o deja una nota de voz. Un especialista B&B revisará tu contexto.",
+          placeholder: "Escribe un mensaje…",
+          foot: "No necesitamos accesos a plataformas ni datos sensibles.",
+          closeAria: "Cerrar chat",
+          micAria: "Grabar nota de voz",
+          sendAria: "Enviar",
+          initialBot: "¿Dónde quieres generar un cambio?",
+          initialChoices: [
+            "Calidad de leads",
+            "Rendimiento de campañas",
+            "Medición y atribución",
+            "IA y automatización",
+            "Conversión",
+            "Producto digital"
+          ],
+          continueBtn: "Continuar",
+          emailErr: "Ingresa un correo válido, por ejemplo nombre@empresa.com.",
+          askOutcome: "¿Qué resultado quieres mejorar?",
+          outcomePlaceholder: "Leads, conversión, medición…",
+          askTiming: "¿Cuándo quieres actuar?",
+          timingChoices: ["Ahora", "En los próximos 90 días", "Estoy explorando"],
+          askName: "Tu nombre y apellido",
+          namePlaceholder: "Nombre completo",
+          askEmail: "Tu correo corporativo",
+          emailPlaceholder: "nombre@empresa.com",
+          askCompany: "Empresa y sitio web",
+          companyPlaceholder: "Empresa · sitio.com",
+          askPhoneOpt: "¿Quieres dejar un teléfono o WhatsApp? Es opcional.",
+          phoneChoices: ["Añadir teléfono", "Omitir"],
+          askPhone: "Incluye el código de país.",
+          phonePlaceholder: "+57…",
+          voiceThanks: "Gracias por la nota. ¿Qué resultado quieres mejorar?",
+          voicePrompt: "Puedes responder con una frase.",
+          voiceLabel: "Nota de voz · ",
+          micDenied: "Permite el acceso al micrófono para grabar, o continúa escribiendo.",
+          sending: "Enviando tu solicitud…",
+          sentOk: "Recibimos tu solicitud. El equipo B&B revisará el contexto y te contactará.",
+          sentErr: "No se pudo enviar ahora. Intenta de nuevo o escribe a info@brandandbyte.com.",
+          contextPrefix: "Cotizando: "
+        },
+        en: {
+          title: "What would you like<br>to take to the next level?",
+          subtitle: "Tell us in your own words or leave a voice note. A B&B specialist will review your context.",
+          placeholder: "Write a message…",
+          foot: "We don't need platform access or sensitive data.",
+          closeAria: "Close chat",
+          micAria: "Record voice note",
+          sendAria: "Send",
+          initialBot: "Where do you want to drive change?",
+          initialChoices: [
+            "Lead quality",
+            "Campaign performance",
+            "Measurement & attribution",
+            "AI & automation",
+            "Conversion",
+            "Digital product"
+          ],
+          continueBtn: "Continue",
+          emailErr: "Enter a valid email, e.g. name@company.com.",
+          askOutcome: "What outcome do you want to improve?",
+          outcomePlaceholder: "Leads, conversion, measurement…",
+          askTiming: "When do you want to act?",
+          timingChoices: ["Now", "In the next 90 days", "Just exploring"],
+          askName: "Your full name",
+          namePlaceholder: "Full name",
+          askEmail: "Your work email",
+          emailPlaceholder: "name@company.com",
+          askCompany: "Company and website",
+          companyPlaceholder: "Company · site.com",
+          askPhoneOpt: "Would you like to leave a phone or WhatsApp? Optional.",
+          phoneChoices: ["Add phone", "Skip"],
+          askPhone: "Include country code.",
+          phonePlaceholder: "+1…",
+          voiceThanks: "Thanks for the voice note. What outcome do you want to improve?",
+          voicePrompt: "You can reply with a short phrase.",
+          voiceLabel: "Voice note · ",
+          micDenied: "Please allow microphone access to record, or continue typing.",
+          sending: "Sending your request…",
+          sentOk: "We received your request. The B&B team will review your context and reach out.",
+          sentErr: "Could not send right now. Please try again or email info@brandandbyte.com.",
+          contextPrefix: "Quoting: "
+        }
+      };
+
+      function getChatDict() {
+        return chatCopy[state.lang] || chatCopy.es;
+      }
+
+      function chatSay(text, who = "bot") {
+        const row = document.createElement("div");
+        row.className = "bb-chat-row" + (who === "user" ? " user" : "");
+        if (who === "bot") {
+          const av = document.createElement("span");
+          av.className = "bb-chat-avatar";
+          av.textContent = "✳";
+          row.appendChild(av);
+        }
+        const bubble = document.createElement("div");
+        bubble.className = "bb-chat-bubble";
+        bubble.textContent = text;
+        row.appendChild(bubble);
+        chatThread.appendChild(row);
+        row.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+
+      function chatChoices(options, cb) {
+        const box = document.createElement("div");
+        box.className = "bb-chat-choices";
+        options.forEach((opt) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.textContent = opt;
+          btn.addEventListener("click", () => {
+            box.remove();
+            chatSay(opt, "user");
+            cb(opt);
+          });
+          box.appendChild(btn);
+        });
+        chatThread.appendChild(box);
+        box.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+
+      function chatAsk(promptText, placeholderText, inputType, cb) {
+        const t = getChatDict();
+        chatSay(promptText);
+        const form = document.createElement("form");
+        form.className = "bb-chat-inline";
+        const input = document.createElement("input");
+        input.placeholder = placeholderText;
+        input.type = inputType;
+        input.required = true;
+        input.autocomplete = inputType === "email" ? "email" : (inputType === "tel" ? "tel" : "name");
+        const btn = document.createElement("button");
+        btn.type = "submit";
+        btn.textContent = t.continueBtn;
+        const err = document.createElement("div");
+        err.className = "bb-chat-error";
+        form.append(input, btn);
+        chatThread.append(form, err);
+        setTimeout(() => input.focus(), 40);
+        form.scrollIntoView({ block: "nearest", behavior: "smooth" });
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (!input.checkValidity()) {
+            input.reportValidity();
+            err.textContent = inputType === "email" ? t.emailErr : "";
+            return;
+          }
+          const val = input.value.trim();
+          if (!val) return;
+          form.remove();
+          err.remove();
+          chatSay(val, "user");
+          cb(val);
+        });
+      }
+
+      function toBase64(blob) {
+        return new Promise((ok, no) => {
+          const r = new FileReader();
+          r.onload = () => ok(String(r.result).split(",")[1]);
+          r.onerror = no;
+          r.readAsDataURL(blob);
+        });
+      }
+
+      async function submitChatLead() {
+        const t = getChatDict();
+        chatStatusBox.style.display = "block";
+        chatStatusBox.className = "bb-chat-status";
+        chatStatusBox.textContent = t.sending;
+
+        const payload = {
+          ...chatBrief,
+          challenge: chatBrief.challenge || chatActiveContext || "Growth inquiry",
+          context: chatBrief.context || chatActiveContext || "",
+          voice: chatVoiceBlob
+            ? {
+                name: "bb-voice-note.webm",
+                type: chatVoiceBlob.type || "audio/webm",
+                data: await toBase64(chatVoiceBlob)
+              }
+            : null
+        };
+
+        try {
+          const res = await fetch("/api/lead", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          const out = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(out.error || "Failed");
+          chatStatusBox.textContent = t.sentOk;
+          chatSay(t.sentOk, "bot");
+        } catch (err) {
+          chatStatusBox.className = "bb-chat-status error";
+          chatStatusBox.textContent = t.sentErr;
+        }
+      }
+
+      function runChatIntake(challengeText) {
+        const t = getChatDict();
+        chatStarted = true;
+        chatBrief.challenge = challengeText;
+        chatAsk(t.askOutcome, t.outcomePlaceholder, "text", (outcomeVal) => {
+          chatBrief.outcome = outcomeVal;
+          chatSay(t.askTiming);
+          chatChoices(t.timingChoices, (timingVal) => {
+            chatBrief.timing = timingVal;
+            chatAsk(t.askName, t.namePlaceholder, "text", (nameVal) => {
+              chatBrief.name = nameVal;
+              chatAsk(t.askEmail, t.emailPlaceholder, "email", (emailVal) => {
+                chatBrief.email = emailVal;
+                chatAsk(t.askCompany, t.companyPlaceholder, "text", (companyVal) => {
+                  chatBrief.company = companyVal;
+                  chatSay(t.askPhoneOpt);
+                  chatChoices(t.phoneChoices, (phoneChoice) => {
+                    if (phoneChoice === t.phoneChoices[0]) {
+                      chatAsk(t.askPhone, t.phonePlaceholder, "tel", (phoneVal) => {
+                        chatBrief.phone = phoneVal;
+                        submitChatLead();
+                      });
+                    } else {
+                      submitChatLead();
+                    }
+                  });
+                });
+              });
+            });
+          });
+        });
+      }
+
+      function initChatThread(contextLabel) {
+        const t = getChatDict();
+        chatBrief = {};
+        chatVoiceBlob = null;
+        chatStarted = false;
+        chatActiveContext = (contextLabel && contextLabel !== "General") ? contextLabel : "";
+        if (chatActiveContext) {
+          chatBrief.context = chatActiveContext;
+        }
+
+        if (chatTitleEl) chatTitleEl.innerHTML = t.title;
+        if (chatSubtitleEl) chatSubtitleEl.textContent = t.subtitle;
+        if (chatMsg) chatMsg.placeholder = t.placeholder;
+        if (chatFootEl) chatFootEl.textContent = t.foot;
+        if (chatCloseBtn) chatCloseBtn.setAttribute("aria-label", t.closeAria);
+        if (chatMicBtn) chatMicBtn.setAttribute("aria-label", t.micAria);
+        if (chatSendBtn) chatSendBtn.setAttribute("aria-label", t.sendAria);
+
+        if (chatContextBadge) {
+          if (chatActiveContext) {
+            chatContextBadge.textContent = t.contextPrefix + chatActiveContext;
+            chatContextBadge.hidden = false;
+          } else {
+            chatContextBadge.textContent = "";
+            chatContextBadge.hidden = true;
+          }
+        }
+
+        if (chatStatusBox) {
+          chatStatusBox.style.display = "none";
+          chatStatusBox.className = "bb-chat-status";
+          chatStatusBox.textContent = "";
+        }
+
+        if (chatThread) {
+          chatThread.innerHTML = "";
+          chatSay(t.initialBot, "bot");
+          chatChoices(t.initialChoices, (selectedChoice) => {
+            runChatIntake(selectedChoice);
+          });
+        }
+      }
+
+      function openGrowthChat(contextLabel = "General") {
+        if (!chatModal) return;
+        initChatThread(contextLabel);
+        chatModal.hidden = false;
+        document.body.style.overflow = "hidden";
+        setTimeout(() => {
+          chatMsg?.focus();
+        }, 60);
+      }
+
+      function closeGrowthChat() {
+        if (!chatModal || chatModal.hidden) return;
+        if (chatRec && chatRec.state === "recording") {
+          chatRec.stop();
+        }
+        chatModal.hidden = true;
+        document.body.style.overflow = "";
+      }
+
+      chatCloseBtn?.addEventListener("click", closeGrowthChat);
+
+      chatModal?.addEventListener("click", (e) => {
+        if (e.target === chatModal) {
+          closeGrowthChat();
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && chatModal && !chatModal.hidden) {
+          closeGrowthChat();
+        }
+      });
+
+      chatSendBtn?.addEventListener("click", () => {
+        const val = chatMsg.value.trim();
+        if (!val) return;
+        chatMsg.value = "";
+
+        // If an inline step input is active in the thread, feed the value into it
+        const activeInlineForm = chatThread?.querySelector("form.bb-chat-inline");
+        if (activeInlineForm) {
+          const inlineInput = activeInlineForm.querySelector("input");
+          if (inlineInput) {
+            inlineInput.value = val;
+            activeInlineForm.requestSubmit();
+            return;
+          }
+        }
+
+        const initialChoicesBox = chatThread?.querySelector(".bb-chat-choices");
+        if (initialChoicesBox && !chatStarted) {
+          initialChoicesBox.remove();
+        }
+        chatSay(val, "user");
+        chatBrief.context = chatBrief.context ? (chatBrief.context + " · " + val) : val;
+        if (!chatStarted) {
+          runChatIntake(val);
+        }
+      });
+
+      chatMsg?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          chatSendBtn?.click();
+        }
+      });
+
+      chatMicBtn?.addEventListener("click", async () => {
+        const t = getChatDict();
+        if (chatRec && chatRec.state === "recording") {
+          chatRec.stop();
+          return;
+        }
+        try {
+          chatStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          chatRec = new MediaRecorder(chatStream);
+          chatChunks = [];
+          chatRec.ondataavailable = (e) => chatChunks.push(e.data);
+          chatRec.onstop = () => {
+            chatVoiceBlob = new Blob(chatChunks, { type: chatRec.mimeType || "audio/webm" });
+            const row = document.createElement("div");
+            row.className = "bb-chat-row user";
+            const b = document.createElement("div");
+            b.className = "bb-chat-audio";
+            b.textContent = t.voiceLabel + Math.max(1, Math.round((Date.now() - chatRecordBegin) / 1000)) + " s";
+            const audioEl = document.createElement("audio");
+            audioEl.controls = true;
+            audioEl.src = URL.createObjectURL(chatVoiceBlob);
+            b.appendChild(audioEl);
+            row.appendChild(b);
+            chatThread.appendChild(row);
+            chatMicBtn.classList.remove("recording");
+            chatStream.getTracks().forEach((tr) => tr.stop());
+            if (!chatStarted) {
+              const initialChoicesBox = chatThread?.querySelector(".bb-chat-choices");
+              if (initialChoicesBox) initialChoicesBox.remove();
+              chatStarted = true;
+              chatBrief.challenge = chatActiveContext || "Voice note";
+              chatSay(t.voiceThanks);
+              chatAsk(t.voicePrompt, t.outcomePlaceholder, "text", (outcomeVal) => {
+                chatBrief.outcome = outcomeVal;
+                chatSay(t.askTiming);
+                chatChoices(t.timingChoices, (timingVal) => {
+                  chatBrief.timing = timingVal;
+                  chatAsk(t.askName, t.namePlaceholder, "text", (nameVal) => {
+                    chatBrief.name = nameVal;
+                    chatAsk(t.askEmail, t.emailPlaceholder, "email", (emailVal) => {
+                      chatBrief.email = emailVal;
+                      chatAsk(t.askCompany, t.companyPlaceholder, "text", (companyVal) => {
+                        chatBrief.company = companyVal;
+                        submitChatLead();
+                      });
+                    });
+                  });
+                });
+              });
+            }
+          };
+          chatRecordBegin = Date.now();
+          chatRec.start();
+          chatMicBtn.classList.add("recording");
+        } catch (err) {
+          chatSay(t.micDenied, "bot");
+        }
+      });
+
+      // Global delegated click handler for all CTAs with [data-open-chat]
+      document.addEventListener("click", (e) => {
+        const trigger = e.target.closest("[data-open-chat]");
+        if (!trigger) return;
+        e.preventDefault();
+        if (mobileDrawer && !mobileDrawer.hidden) {
+          mobileDrawer.classList.remove("open");
+          mobileDrawer.hidden = true;
+          mobileToggleBtn?.classList.remove("active");
+          mobileToggleBtn?.setAttribute("aria-expanded", "false");
+        }
+        const ctx = trigger.getAttribute("data-open-chat") || "General";
+        openGrowthChat(ctx);
       });
 
       // 9. Initial Activation
